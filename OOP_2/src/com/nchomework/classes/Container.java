@@ -54,23 +54,4 @@ public class Container {
     public String toString() {
         return "Container[(" + x1 + "," + y1 + "),(" + x2 + "," + y2 + ")]";
     }
-
-
-    public static void main(String[] args) {
-        Container container = new Container(0, 0, 200, 200);
-        Ball ball = new Ball(100, 100, 5, 1, 17);
-        for (;;) {
-            while (container.collidesWidth(ball) && container.collidesHeight(ball)) {
-                ball.move();
-            }
-            if (!container.collidesWidth(ball)) {
-                ball.reflectHorizontal();
-            }
-            if (!container.collidesHeight(ball)) {
-                ball.reflectVertical();
-            }
-            System.out.println(ball);
-            ball.move();
-        }
-    }
 }
