@@ -1,4 +1,4 @@
-package com.example;
+package com.example.point;
 
 import java.util.Objects;
 

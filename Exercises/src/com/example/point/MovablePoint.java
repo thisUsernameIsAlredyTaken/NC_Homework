@@ -1,11 +1,11 @@
-package com.example;
+package com.example.point;
 
 import java.util.Objects;
 
 public class MovablePoint extends Point2D {
 
-    private float xSpeed = 0.0f;
-    private float ySpeed = 0.0f;
+    private float xSpeed = 1.0f;
+    private float ySpeed = 1.0f;
 
     public MovablePoint(float x, float y, float xSpeed, float ySpeed) {
         super(x, y);
@@ -48,13 +48,7 @@ public class MovablePoint extends Point2D {
 
     @Override
     public String toString() {
-        return super.toString() + ",speed=(" + xSpeed + "," + ySpeed + ")";
-    }
-
-    public MovablePoint move() {
-        setX(getX() + xSpeed);
-        setY(getY() + ySpeed);
-        return this;
+        return "(" + getX() + "," + getY() + "),speed=(" + xSpeed + "," + ySpeed + ")";
     }
 
     @Override
@@ -70,5 +64,11 @@ public class MovablePoint extends Point2D {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), xSpeed, ySpeed);
+    }
+
+    public MovablePoint move() {
+        setX(getX() + xSpeed);
+        setY(getY() + ySpeed);
+        return this;
     }
 }

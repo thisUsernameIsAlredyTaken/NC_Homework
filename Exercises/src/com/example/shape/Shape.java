@@ -1,4 +1,4 @@
-package com.example;
+package com.example.shape;
 
 import java.util.Objects;
 
