@@ -35,10 +35,12 @@ public class Rectangle extends Shape {
         this.height = height;
     }
 
+    @Override
     public double getArea() {
         return height * width;
     }
 
+    @Override
     public double getPerimeter() {
         return 2 * (height + width);
     }

@@ -2,7 +2,7 @@ package com.example;
 
 import java.util.Objects;
 
-public class Shape {
+public abstract class Shape {
 
     private String color = "red";
     private boolean filled = true;
@@ -30,6 +30,10 @@ public class Shape {
     public void setFilled(boolean filled) {
         this.filled = filled;
     }
+
+    public abstract double getArea();
+
+    public abstract double getPerimeter();
 
     @Override
     public String toString() {
