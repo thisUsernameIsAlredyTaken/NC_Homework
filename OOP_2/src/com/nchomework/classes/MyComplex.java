@@ -53,8 +53,9 @@ public class MyComplex {
         return getReal() == real &&  getImag() == imag;
     }
 
-    public boolean equals(MyComplex another) {
-        return equals(another.getReal(), another.getImag());
+    public boolean equals(Object another) {
+        MyComplex c = (MyComplex) another;
+        return equals(c.getReal(), c.getImag());
     }
 
     public double magnitude() {
