@@ -1,5 +1,7 @@
 package com.nchomework.classes;
 
+import java.util.Objects;
+
 public class MyComplex {
 
     private double real = 0.0;
@@ -110,5 +112,10 @@ public class MyComplex {
 
     public MyComplex conjugate() {
         return new MyComplex(getReal(), -1 * getImag());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(real, imag);
     }
 }
