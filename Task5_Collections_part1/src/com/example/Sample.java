@@ -6,57 +6,69 @@ import java.util.LinkedList;
 
 public class Sample {
 
-    public static void main(String[] args) {
-        final int size = 10000;
-        final int index = size / 2;
-        MyLinkedList<Integer> list = new MyLinkedList<>();
-        LinkedList<Integer> javaList = new LinkedList<>();
-        for (int i = 0; i < size; i++) {
-            list.add(i + 1);
-            javaList.add(i + 1);
+    private static double average(double... nums) {
+        double sum = 0.0;
+        for (double num : nums) {
+            sum += num;
         }
+        return sum / nums.length;
+    }
 
-        double[] addTime = new double[2];
-        double[] getTime = new double[2];
-        double[] delTime = new double[2];
+    public static void main(String[] args) {
+        for (String arg : args) {
+            final int repeat = 8;
+            final int size = Integer.parseInt(arg);
+            final int index = size / 2;
+            MyLinkedList<Integer> custList = new MyLinkedList<>();
+            LinkedList<Integer> javaList = new LinkedList<>();
+            for (int i = 0; i < size; i++) {
+                custList.add(i + 1);
+                javaList.add(i + 1);
+            }
 
-        addTime[0] = System.nanoTime();
-        list.add(index, 0);
-        addTime[0] = System.nanoTime() - addTime[0];
+            double[] javAddTimes = new double[repeat];
+            double[] cusAddTimes = new double[repeat];
+            double[] javGetTimes = new double[repeat];
+            double[] cusGetTimes = new double[repeat];
+            double[] javDelTimes = new double[repeat];
+            double[] cusDelTimes = new double[repeat];
 
-        getTime[0] = System.nanoTime();
-        list.get(index);
-        getTime[0] = System.nanoTime() - getTime[0];
+            for (int i = 0; i < repeat; i++) {
+                cusAddTimes[i] = System.nanoTime();
+                custList.add(index, 0);
+                cusAddTimes[i] = System.nanoTime() - cusAddTimes[i];
 
-        delTime[0] = System.nanoTime();
-        list.remove(index);
-        delTime[0] = System.nanoTime() - delTime[0];
+                cusGetTimes[i] = System.nanoTime();
+                custList.get(index);
+                cusGetTimes[i] = System.nanoTime() - cusGetTimes[i];
 
-        System.out.println("MyLinkedList:");
-        System.out.println("\taddTime = " + addTime[0]);
-        System.out.println("\tgetTime = " + getTime[0]);
-        System.out.println("\tdelTime = " + delTime[0]);
+                cusDelTimes[i] = System.nanoTime();
+                custList.remove(index);
+                cusDelTimes[i] = System.nanoTime() - cusDelTimes[i];
 
-        addTime[1] = System.nanoTime();
-        javaList.add(index, 0);
-        addTime[1] = System.nanoTime() - addTime[1];
+                javAddTimes[i] = System.nanoTime();
+                javaList.add(index, 0);
+                javAddTimes[i] = System.nanoTime() - javAddTimes[i];
 
-        getTime[1] = System.nanoTime();
-        javaList.get(index);
-        getTime[1] = System.nanoTime() - getTime[1];
+                javGetTimes[i] = System.nanoTime();
+                javaList.get(index);
+                javGetTimes[i] = System.nanoTime() - javGetTimes[i];
 
-        delTime[1] = System.nanoTime();
-        javaList.remove(index);
-        delTime[1] = System.nanoTime() - delTime[1];
+                javDelTimes[i] = System.nanoTime();
+                javaList.remove(index);
+                javDelTimes[i] = System.nanoTime() - javDelTimes[i];
+            }
 
-        System.out.println("JavaLinkedList");
-        System.out.println("\taddTime = " + addTime[1]);
-        System.out.println("\tgetTime = " + getTime[1]);
-        System.out.println("\tdelTime = " + delTime[1]);
-
-        System.out.println("Efficiency: ");
-        System.out.println("Add: " + addTime[1] / addTime[0]);
-        System.out.println("Get: " + getTime[1] / getTime[0]);
-        System.out.println("Del: " + delTime[1] / delTime[0]);
+            System.out.println("List size: " + size);
+            System.out.println("\tJava list:");
+            System.out.printf("\t\tAdd: %f\n", average(javAddTimes));
+            System.out.printf("\t\tGet: %f\n", average(javGetTimes));
+            System.out.printf("\t\tDel: %f\n", average(javDelTimes));
+            System.out.println("\tMy list:");
+            System.out.printf("\t\tAdd: %f\n", average(cusAddTimes));
+            System.out.printf("\t\tGet: %f\n", average(cusGetTimes));
+            System.out.printf("\t\tDel: %f\n", average(cusDelTimes));
+            System.out.flush();
+        }
     }
 }
