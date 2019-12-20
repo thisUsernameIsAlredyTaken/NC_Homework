@@ -5,6 +5,7 @@ import com.example.collection.MyArrayList;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 public class Sample {
 
@@ -81,7 +82,7 @@ public class Sample {
         for (String arg : args) {
             final int size = Integer.parseInt(arg);
             final int index = 0;
-            ArrayList<Integer> arrayList = new ArrayList<>();
+            List<Integer> arrayList = new Vector<>();
             LinkedList<Integer> linkedList = new LinkedList<>();
             for (int i = 0; i < size; i++) {
                 arrayList.add(i + 1);
