@@ -2,7 +2,7 @@ package com.example.collection;
 
 import java.util.Iterator;
 
-public class MyLinkedList<E> implements ILinkedList<E> {
+public class MyArrayList<E> implements ILinkedList<E> {
     private class Node {
         Node prevNode;
         E element;
@@ -38,7 +38,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     private int size = 0;
     private E type = null;
 
-    public MyLinkedList() {}
+    public MyArrayList() {}
 
     @Override
     public void add(E element) {
