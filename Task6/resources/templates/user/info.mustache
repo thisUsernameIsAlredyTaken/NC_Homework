@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        td:first-child {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<p>User info:</p>
+<table>
+    <tbody>
+    {{#users}}
+    <tr>
+        <td>Фамилия: </td>
+        <td>{{firstName}}</td>
+    </tr>
+    <tr>
+        <td>Имя: </td>
+        <td>{{lastName}}</td>
+    </tr>
+    <tr>
+        <td>Отчество: </td>
+        <td>{{thirdName}}</td>
+    </tr>
+    <tr>
+        <td>Возраст: </td>
+        <td>{{age}}</td>
+    </tr>
+    <tr>
+        <td>Зарплата: </td>
+        <td>{{salary}}</td>
+    </tr>
+    <tr>
+        <td>Почта: </td>
+        <td>{{mail}}</td>
+    </tr>
+    <tr>
+        <td>Место работы: </td>
+        <td>{{workPlace}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <a href="/mail?mail={{mail}}"><button>Send mail</button></a>
+        </td>
+    </tr>
+    <tr><td><br></td><td><br></td></tr>
+    {{/users}}
+    </tbody>
+</table>
+</body>
+</html>

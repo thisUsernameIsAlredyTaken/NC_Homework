@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/form.css">
+</head>
+<body>
+<form action="/user" method="post">
+    <label for="last_name">
+        Фамилия:
+    </label>
+    <input type="text" id="last_name" name="lastName">
+    <br>
+    <label for="first_name">
+        Имя:
+    </label>
+    <input type="text" id="first_name" name="firstName">
+    <br>
+    <label for="third_name">
+        Отчество:
+    </label>
+    <input type="text" id="third_name" name="thirdName">
+    <br>
+    <label for="age">
+        Возраст:
+    </label>
+    <input type="number" id="age" name="age">
+    <br>
+    <label for="salary">
+        Зарплата:
+    </label>
+    <input type="number" id="salary" name="salary">
+    <br>
+    <label for="email">
+        Электронная почта:
+    </label>
+    <input type="email" id="email" name="email">
+    <br>
+    <label for="work_place">
+        Место работы:
+    </label>
+    <input type="text" id="work_place" name="workPlace">
+    <br>
+    <input type="submit">
+</form>
+<hr>
+<div>
+    <label for="file">Выберите файл: </label><input type="file" id="file" name="file">
+    <button onclick="sendFileToServer();">Отправить</button>
+</div>
+</body>
+<script type="text/javascript">
+    function sendFileToServer() {
+        let file = document.getElementById('file').files[0];
+        if (file) {
+            file.text().then(text => {
+                fetch('/user/from_file',
+                        {
+                            method: 'POST',
+                            body: text
+                        });
+            });
+        }
+    }
+</script>
+</html>
