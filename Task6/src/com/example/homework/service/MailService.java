@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class MailService {
 
     public void send(String email, String message) {
-
+        
     }
 }

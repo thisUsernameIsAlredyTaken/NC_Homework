@@ -1,0 +1,11 @@
+Task6.iml
+.mvn/
+target/
+.idea/
+out/
+*.class
+Task6.iml
+*.iml
+data.csv
+HELP.md
+Eee.java
