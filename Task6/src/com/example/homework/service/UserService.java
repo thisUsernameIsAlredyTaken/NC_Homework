@@ -1,24 +1,29 @@
 package com.example.homework.service;
 
 import com.example.homework.model.User;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 @Service
+@AllArgsConstructor
 public class UserService {
 
+//    private final FileService fileService;
     private final String separator = "-~-";
 
     public boolean addNewUser(User user) {
         if (!validateUser(user)) {
             return false;
         }
+        String newUserData = userToString(user);
         try (FileWriter file = new FileWriter("./resources/data.csv", true)) {
-            String newUserData = userToString(user);
             file.write(newUserData + "\n");
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,29 +59,23 @@ public class UserService {
         return result;
     }
 
-    private boolean findMail(String email) {
-        try (Scanner scanner = new Scanner(new File("./resources/data.csv"))) {
+    public boolean addNewUsersFromFile(MultipartFile file) {
+//        fileService.uploadFile(file);
+        boolean added = false;
+        try (
+                Scanner scanner = new Scanner(file.getInputStream())
+                ) {
             while (scanner.hasNextLine()) {
                 User user = userFromString(scanner.nextLine());
-                if (email.equals(user.getMail())) {
-                    return true;
+                if (addNewUser(user)) {
+                    added = true;
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            return true;
+            return false;
         }
-        return false;
-    }
-
-    public boolean addNewUsersFromString(String data) {
-        Scanner scanner = new Scanner(data);
-        while (scanner.hasNextLine()) {
-            User user = userFromString(scanner.nextLine());
-            addNewUser(user);
-        }
-        scanner.close();
-        return true;
+        return added;
     }
 
     private String userToString(User user) {
@@ -91,6 +90,14 @@ public class UserService {
 
     private User userFromString(String userData) {
         String[] data = userData.split(separator);
+        if (data.length == 6) {
+            String[] tmp = new String[7];
+            for (int i = 0; i < data.length; i++) {
+                tmp[i] = data[i];
+            }
+            tmp[6] = "";
+            data = tmp;
+        }
         if (data.length != 7) {
             return null;
         }
@@ -103,11 +110,14 @@ public class UserService {
         if (user == null) {
             return false;
         }
-        if (!user.getMail().matches(".+@.+\\..+") ||
-                findMail(user.getMail())) {
+        if (!user.getMail().matches(".+@.+\\..+")) {
             return false;
         }
         if (user.getAge() < 13 || user.getSalary() < 0) {
+            return false;
+        }
+        if (user.getFirstName().length() < 1 ||
+                user.getLastName().length() < 1) {
             return false;
         }
         return true;

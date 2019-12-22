@@ -30,4 +30,9 @@ public class MappingController {
     public String readUser() {
         return "user/find";
     }
+
+    @GetMapping("user/create_from_file")
+    public String userFromFile() {
+        return "user/create_from_file";
+    }
 }

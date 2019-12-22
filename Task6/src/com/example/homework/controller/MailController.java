@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Controller
@@ -22,8 +23,11 @@ public class MailController {
     }
 
     @PostMapping("send")
-    public String send(@RequestParam String mail, @RequestParam String message) {
-        mailService.send(mail, message);
+    public String send(@RequestParam String mail, @RequestParam String message, HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_OK);
+        if (!mailService.send(mail, message)) {
+            response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        }
         return "index";
     }
 }
