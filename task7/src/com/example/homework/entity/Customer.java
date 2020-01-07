@@ -26,7 +26,7 @@ public class Customer {
     private String district;
 
     @NonNull
-    private double commission;
+    private double discount;
 }
 
 

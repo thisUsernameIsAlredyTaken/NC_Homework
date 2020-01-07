@@ -26,5 +26,5 @@ public class Store {
     private String district;
 
     @NonNull
-    private double commissions;
+    private double commission;
 }
