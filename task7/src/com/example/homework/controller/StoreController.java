@@ -36,9 +36,15 @@ public class StoreController {
         return store;
     }
 
-    @PutMapping
-    public void updateStore(@RequestBody Store store,
+    @PutMapping("{id}")
+    public void updateStore(@PathVariable long id,
+                            @RequestBody Store store,
                             HttpServletResponse response) {
+        if (store.getId() != null) {
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return;
+        }
+        store.setId(id);
         if (storeService.update(store)) {
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } else {

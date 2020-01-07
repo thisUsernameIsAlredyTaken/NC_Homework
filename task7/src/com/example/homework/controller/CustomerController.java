@@ -36,9 +36,15 @@ public class CustomerController {
         return foundedCustomer;
     }
 
-    @PutMapping
-    public void updateCustomer(@RequestBody Customer customer,
+    @PutMapping("{id}")
+    public void updateCustomer(@PathVariable long id,
+                               @RequestBody Customer customer,
                                HttpServletResponse response) {
+        if (customer.getId() != null) {
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return;
+        }
+        customer.setId(id);
         if (customerService.update(customer)) {
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } else {

@@ -16,13 +16,8 @@ public class CustomerService {
 
     // CRUD
     public boolean add(Customer customer) {
-        if (customer == null) {
+        if (customer == null || customer.getId() != null) {
             return false;
-        }
-        if (customer.getId() != null) {
-            if (isExist(customer.getId())) {
-                return false;
-            }
         }
         customerRepos.save(customer);
         return true;

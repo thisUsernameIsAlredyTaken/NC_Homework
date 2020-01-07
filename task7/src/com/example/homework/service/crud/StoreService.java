@@ -16,13 +16,8 @@ public class StoreService {
 
     // CRUD
     public boolean add(Store store) {
-        if (store == null) {
+        if (store == null || store.getId() != null) {
             return false;
-        }
-        if (store.getId() != null) {
-            if (isExist(store.getId())) {
-                return false;
-            }
         }
         storeRepos.save(store);
         return true;

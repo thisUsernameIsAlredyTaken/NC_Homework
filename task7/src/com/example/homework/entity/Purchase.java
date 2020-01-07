@@ -16,7 +16,7 @@ public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long orderNumber;
+    private Long orderNumber;
 
     @NonNull
     @Column(nullable = false)
