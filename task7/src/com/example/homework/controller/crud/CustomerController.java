@@ -1,4 +1,4 @@
-package com.example.homework.controller;
+package com.example.homework.controller.crud;
 
 import com.example.homework.entity.Customer;
 import com.example.homework.service.crud.CustomerService;

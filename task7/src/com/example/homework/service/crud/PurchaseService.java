@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.hibernate.type.DateType;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -67,7 +68,7 @@ public class PurchaseService {
         return purchaseRepos.existsById(orderNumber);
     }
 
-    public boolean patchByOrderNumber(long orderNumber, DateType date,
+    public boolean patchByOrderNumber(long orderNumber, Date date,
                                       Long sellerId, Long buyerId,
                                       Long bookId, Integer amount,
                                       Double cost) {

@@ -1,4 +1,4 @@
-package com.example.homework.controller;
+package com.example.homework.controller.crud;
 
 import com.example.homework.entity.Store;
 import com.example.homework.service.crud.StoreService;

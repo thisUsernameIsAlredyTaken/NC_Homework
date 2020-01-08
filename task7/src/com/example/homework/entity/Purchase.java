@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.type.DateType;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -20,7 +21,7 @@ public class Purchase {
 
     @NonNull
     @Column(nullable = false)
-    private DateType date;
+    private Date date;
 
     @NonNull
     @ManyToOne(optional = false)

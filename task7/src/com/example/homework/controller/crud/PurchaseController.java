@@ -1,4 +1,4 @@
-package com.example.homework.controller;
+package com.example.homework.controller.crud;
 
 import com.example.homework.entity.Purchase;
 import com.example.homework.service.crud.PurchaseService;
@@ -7,6 +7,7 @@ import org.hibernate.type.DateType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -70,7 +71,7 @@ public class PurchaseController {
 
     @PatchMapping("{orderNumber}")
     public void patchBook(@PathVariable long orderNumber,
-                          @RequestParam(required = false) DateType date,
+                          @RequestParam(required = false) Date date,
                           @RequestParam(required = false) Long sellerId,
                           @RequestParam(required = false) Long buyerId,
                           @RequestParam(required = false) Long bookId,
